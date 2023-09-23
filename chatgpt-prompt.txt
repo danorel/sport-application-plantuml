@@ -1,0 +1,6 @@
+Generate PlantUML diagram via specification:
+- Athlete: Athlete track activity via Device. Athlete has such properties: gender, age, weight, and height.
+- Device: Device send activity data to Provider. Device has properties: manufacturer, serial number, and version.
+- Provider: Provider save to database Activity. Provider send via webhook Activity to Application.
+- Activity: Activity has properties: total duration in seconds, total distance in meters, total ascending in meters, total descending in meters, timestamps, heart rate in beats per minute samples, speed in meters per second samples, elevation in meters samples.
+- Application: Application deliver Activity to Athlete.

@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+skinparam defaultTextAlignment center
+
+class Athlete {
+  +gender : “male” | “female” | “other”
+  +age : int
+  +weight : float
+  +height : float
+  +trackActivityVia(Device)
+}
+
+class Device {
+  +manufacturer : “Garmin” | “Apple” | “Samsung” | “Suunto”
+  +serialNumber : string
+  +version : string
+  +sendActivityDataTo(Provider)
+}
+
+class Provider {
+  +name: “Garmin” | “Apple” | “Samsung” | “Suunto” 
+  +saveToDatabase(Activity)
+  +sendViaWebhook(Activity)
+}
+
+class Activity {
+  +totalDurationInSeconds : int
+  +totalDistanceInMeters : float
+  +totalAscendingInMeters : float
+  +totalDescendingInMeters : float
+  +timestamps: int[]
+  +heartRateInBeatsPerMinuteSamples : int[]
+  +speedInMetersPerSecondSamples : float[]
+  +elevationInMetersSamples : float[]
+}
+
+class Application {
+  +name: string
+  +deliver(Activity) : Athlete
+}
+
+Athlete -- Device : trackActivityVia
+Device -- Provider : sendActivityDataTo 
+Provider -- Activity : saveToDatabase
+Provider -- Application : sendViaWebhook
+Application -- Athlete :  deliver
+
+@enduml
